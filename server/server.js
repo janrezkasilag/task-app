@@ -34,16 +34,23 @@ app.post("/add-task", async (req, res) => {
 });
 
 
-// GET TASKS API
-app.get("/tasks", async (req, res) => {
-  try {
-    const tasks = await Task.find();
+// ROOT ROUTE
+app.get("/", (req, res) => {
+  res.send("Backend API is running");
+});
 
-    res.json(tasks);
+
+// ADD TASK
+app.post("/add-task", async (req, res) => {
+  try {
+    res.json({
+      message: "Task Added"
+    });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(500).json(error);
   }
 });
+
 
 app.listen(process.env.PORT, () => {
   console.log(`Server running on port ${process.env.PORT}`);
